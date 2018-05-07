@@ -35,8 +35,12 @@
 	<string>Convert your footsteps to Fitcoins - health data never leaves your phone</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Convert your footsteps to Fitcoins - health data never leaves your phone</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We use location awareness for our scavenger hunt. We will reward you when you go to certain places that are marked in the map!</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We use location awareness for our scavenger hunt. We will reward you when you go to certain places that are marked in the map!</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We use location awareness to show which part of the Think Academy you're currently in, and to surprise you with a little Augmented Reality.</string>
+	<string>We use location awareness for our scavenger hunt. We will reward you when you go to certain places that are marked in the map!</string>
 	<key>NSMotionUsageDescription</key>
 	<string>Convert your footsteps to Fitcoins - fitness data never leaves your phone</string>
 	<key>UIBackgroundModes</key>

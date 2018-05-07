@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 import HealthKit
 import CoreMotion
+import CoreLocation
+import UserNotifications
 
 
 extension Notification.Name {
@@ -45,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var pace:Double! = nil
     
     var pedometer = CMPedometer()
+    let locationManager = CLLocationManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -59,7 +62,84 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.initializeData()
         
+        locationManager.delegate = self
+        
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            // Enable or disable features based on authorization.
+            print("geofence notification granted")
+        }
+        
         return true
+    }
+    
+    func geofenceEvent(forRegion region: CLRegion!) {
+        print("Geofence triggered! Region is \(region.identifier)")
+        if (UIApplication.shared.applicationState == .active) {
+            let alert = UIAlertController(title: "You are near \(region.identifier)", message: "You are awarded some bonus fitcoins!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+            window?.rootViewController?.present(alert, animated: true, completion: nil)
+            updateUserRegionsVisited(region.identifier)
+        } else {
+            let content = UNMutableNotificationContent()
+            content.title = "You were near \(region.identifier)"
+            content.body = "You were awarded some bonus fitcoins"
+            
+            let center = UNUserNotificationCenter.current()
+            
+            let request = UNNotificationRequest(identifier: "RewardNotification", content: content, trigger: nil)
+            
+            center.add(request, withCompletionHandler: nil)
+            updateUserRegionsVisited(region.identifier)
+        }
+    }
+    
+    func updateUserRegionsVisited(_ region: String) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        var currentPerson:Person
+        
+        var people: [Person] = []
+        
+        do {
+            people = try context.fetch(Person.fetchRequest())
+            
+            if( people.count > 0 ){
+                currentPerson = people[0]
+                
+                if currentPerson.regions == nil {
+                    currentPerson.regions = [region]
+                } else {
+                    currentPerson.regions?.append(region)
+                }
+                
+                try context.save()
+            }
+        }catch{
+            print("problem saving regions visited")
+        }
+    }
+    
+    func userHasEntered(_ region: String) -> Bool? {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        var currentPerson:Person
+        
+        var people: [Person] = []
+        
+        do {
+            people = try context.fetch(Person.fetchRequest())
+            
+            if( people.count > 0 ){
+                currentPerson = people[0]
+                return currentPerson.regions?.contains(region)
+            } else {
+                return nil
+            }
+        }catch{
+            print("problem saving generated avatar")
+            return nil
+        }
     }
     
     func initializeData(){
@@ -167,5 +247,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+}
+
+extension AppDelegate: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        if region is CLCircularRegion {
+            if userHasEntered(region.identifier) == false || userHasEntered(region.identifier) == nil {
+                geofenceEvent(forRegion: region)
+            }
+        }
+    }
 }
 
