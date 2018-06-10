@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -35,8 +35,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         mapView.delegate = self
         
-        let initialLocation = CLLocation(latitude: 33.918783, longitude: -118.216600)
-        centerMapOnLocation(location: initialLocation)
+        let initialLocation = CLLocation(latitude: 40.748591, longitude: -73.985630)
         
         // remove previous monitored region
         for monitoredRegion in locationManager.monitoredRegions {
@@ -45,10 +44,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         // array of regions
         let sampleRegions: [CLCircularRegion] = [
-            region(center: CLLocationCoordinate2D.init(latitude: 33.918783, longitude: -118.216600), radius: CLLocationDistance.init(1000.00), identifier: "Lynwood"),
-            region(center: CLLocationCoordinate2D.init(latitude: 33.922926, longitude: -118.113632), radius: CLLocationDistance.init(1000.00), identifier: "Downey"),
-            region(center: CLLocationCoordinate2D.init(latitude: 33.991037, longitude: -117.720895), radius: CLLocationDistance.init(1000.00), identifier: "Chino Hills"),
-            region(center: CLLocationCoordinate2D.init(latitude: 33.982299, longitude: -117.703610), radius: CLLocationDistance.init(1000.00), identifier: "Lucille's")
+            region(center: CLLocationCoordinate2D.init(latitude: 40.748591, longitude: -73.985630), radius: CLLocationDistance.init(1000.00), identifier: "Empire State Building"),
+            region(center: CLLocationCoordinate2D.init(latitude: 40.769206, longitude: -73.971940), radius: CLLocationDistance.init(1000.00), identifier: "Central Park Zoo"),
+            region(center: CLLocationCoordinate2D.init(latitude: 40.758980, longitude: -73.984427), radius: CLLocationDistance.init(1000.00), identifier: "Town Square"),
+            region(center: CLLocationCoordinate2D.init(latitude: 40.689249, longitude: -74.044468), radius: CLLocationDistance.init(1000.00), identifier: "Statue of Liberty"),
+            region(center: CLLocationCoordinate2D.init(latitude: 40.710192, longitude: -74.056352), radius: CLLocationDistance.init(1000.00), identifier: "Liberty State Park Station")
         ]
         
         regions = sampleRegions
@@ -65,6 +65,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidAppear(_ animated: Bool) {
         getRegionsVisited()
+        
+        // center on location
+        if (CLLocationManager.authorizationStatus() == .authorizedAlways || CLLocationManager.authorizationStatus() == .authorizedWhenInUse) {
+            centerMapOnLocation(location: locationManager.location!)
+        }
         
         // remove overlays and annotations
         mapView.removeOverlays(mapView.overlays)
@@ -149,6 +154,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         return nil
     }
     
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
+        // center to user's location when authorized
+        if (status == .authorizedAlways || status == .authorizedWhenInUse) {
+            centerMapOnLocation(location: manager.location!)
+        }
+    }
+    
     // handle geofence error
     func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
         print("Monitoring failed for region with identifier: \(region!.identifier)")
@@ -160,7 +173,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 1000, 1000)
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 5000, 5000)
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
@@ -177,9 +190,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             break
             
         case .authorizedAlways:
-            // Enable any of your app's location features
-//            enableMyAlwaysFeatures()
+            centerMapOnLocation(location: locationManager.location!)
             break
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "popoverSegue" {
+            let popoverViewController = segue.destination
+            popoverViewController.modalPresentationStyle = UIModalPresentationStyle.popover
+            popoverViewController.popoverPresentationController!.delegate = self
+            popoverViewController.view.backgroundColor = UIColor.clear
+        }
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
     }
 }

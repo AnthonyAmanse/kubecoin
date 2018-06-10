@@ -128,7 +128,7 @@ class StandingsTableViewController: UITableViewController {
     
     @objc private func getStandingsData(){
         
-        let urlString = "https://anthony-blockchain.us-south.containers.mybluemix.net/leaderboard/top/50"
+        let urlString = BlockchainGlobals.URL + "leaderboard/top/50"
         guard let url = URL(string: urlString) else {
             print("url error")
             return

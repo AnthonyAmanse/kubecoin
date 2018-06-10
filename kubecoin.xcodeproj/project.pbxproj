@@ -14,7 +14,9 @@
 		9278B40C204727AB00D83B4D /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9278B40B204727AB00D83B4D /* Globals.swift */; };
 		92BF0680203D2E0500B388F9 /* ContractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF067F203D2E0500B388F9 /* ContractViewController.swift */; };
 		92BF0682203E761900B388F9 /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF0681203E761900B388F9 /* OrdersViewController.swift */; };
+		92C8F22C20A17C21004101A2 /* RegionsVisitedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C8F22B20A17C21004101A2 /* RegionsVisitedViewController.swift */; };
 		92CE166B203F8BF8002B628C /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CE166A203F8BF8002B628C /* ProductTableViewCell.swift */; };
+		92DFA987209BD200006ADBAC /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DFA986209BD200006ADBAC /* MapViewController.swift */; };
 		A21B5EF7202374890087ADB6 /* secretmap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A21B5EF5202374890087ADB6 /* secretmap.xcdatamodeld */; };
 		A2234E0D1FF4220B002B8244 /* BookletItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2234E0C1FF4220B002B8244 /* BookletItemController.swift */; };
 		A2234E191FF5B108002B8244 /* booklet.json in Resources */ = {isa = PBXBuildFile; fileRef = A2234E181FF5B108002B8244 /* booklet.json */; };
@@ -93,7 +95,9 @@
 		9278B40B204727AB00D83B4D /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		92BF067F203D2E0500B388F9 /* ContractViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractViewController.swift; sourceTree = "<group>"; };
 		92BF0681203E761900B388F9 /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
+		92C8F22B20A17C21004101A2 /* RegionsVisitedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsVisitedViewController.swift; sourceTree = "<group>"; };
 		92CE166A203F8BF8002B628C /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		92DFA986209BD200006ADBAC /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		A21B5EF6202374890087ADB6 /* secretmap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = secretmap.xcdatamodel; sourceTree = "<group>"; };
 		A2234E0C1FF4220B002B8244 /* BookletItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookletItemController.swift; sourceTree = "<group>"; };
 		A2234E181FF5B108002B8244 /* booklet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = booklet.json; sourceTree = "<group>"; };
@@ -268,6 +272,8 @@
 				A21B5EF5202374890087ADB6 /* secretmap.xcdatamodeld */,
 				A2908D751FE2BEE200A0E9BE /* DataViewController.swift */,
 				A2908D771FE2BEE200A0E9BE /* Main.storyboard */,
+				92DFA986209BD200006ADBAC /* MapViewController.swift */,
+				92C8F22B20A17C21004101A2 /* RegionsVisitedViewController.swift */,
 				9278B40920461CE800D83B4D /* OrderTableViewCell.swift */,
 				92CE166A203F8BF8002B628C /* ProductTableViewCell.swift */,
 				92BF0681203E761900B388F9 /* OrdersViewController.swift */,
@@ -482,6 +488,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92C8F22C20A17C21004101A2 /* RegionsVisitedViewController.swift in Sources */,
 				A2F904F42051E242008E1FFA /* Treasure.swift in Sources */,
 				A2908D761FE2BEE200A0E9BE /* DataViewController.swift in Sources */,
 				A21B5EF7202374890087ADB6 /* secretmap.xcdatamodeld in Sources */,
@@ -493,6 +500,7 @@
 				A2E815A31FE876A000EC6F2A /* BookletController.swift in Sources */,
 				9278B40C204727AB00D83B4D /* Globals.swift in Sources */,
 				922D72B2203BA8E200A345A1 /* QuantityViewController.swift in Sources */,
+				92DFA987209BD200006ADBAC /* MapViewController.swift in Sources */,
 				9238EC5D202D09AA00AD1535 /* BlockchainUser.swift in Sources */,
 				A2321A7B20377E0C00E34DA7 /* Ship.swift in Sources */,
 				A2AF796C208D387C00AA99EE /* Standing.swift in Sources */,
@@ -667,14 +675,14 @@
 		A2908D991FE2BEE200A0E9BE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = secretmap/secretmap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CT3Y8HLWZY;
+				DEVELOPMENT_TEAM = 24VUPDRF9D;
 				INFOPLIST_FILE = secretmap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.anton.fitcoin;
+				PRODUCT_BUNDLE_IDENTIFIER = org.anthonyamanse.fitcoin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -684,14 +692,14 @@
 		A2908D9A1FE2BEE200A0E9BE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = secretmap/secretmap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CT3Y8HLWZY;
+				DEVELOPMENT_TEAM = 24VUPDRF9D;
 				INFOPLIST_FILE = secretmap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.anton.fitcoin;
+				PRODUCT_BUNDLE_IDENTIFIER = org.anthonyamanse.fitcoin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

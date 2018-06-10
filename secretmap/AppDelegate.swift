@@ -75,22 +75,116 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func geofenceEvent(forRegion region: CLRegion!) {
         print("Geofence triggered! Region is \(region.identifier)")
+        
+        // either show alert or make a notification
         if (UIApplication.shared.applicationState == .active) {
-            let alert = UIAlertController(title: "You are near \(region.identifier)", message: "You are awarded some bonus fitcoins!", preferredStyle: UIAlertControllerStyle.alert)
+            // request the bonus fitcoins and show alert dialog box
+            if let existingUser = loadUser() {
+                requestBonusFitcoins(existingUser.userId, regionIdentifier: region.identifier, isViewActive: true)
+            }
+        } else {
+            // request the bonus fitcoins and show notification
+            if let existingUser = loadUser() {
+                requestBonusFitcoins(existingUser.userId, regionIdentifier: region.identifier, isViewActive: false)
+            }
+        }
+        // can simplify to
+        // requestBonusFitcoins(existingUser.userId, regionIdentifier: region.identifier, isViewActive: UIApplication.shared.applicationState == .active)
+    }
+    
+    func showAlert(_ region: String, isViewActive: Bool) {
+        if isViewActive {
+            let alert = UIAlertController(title: "You are near \(region)", message: "You are awarded some bonus fitcoins!", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
             window?.rootViewController?.present(alert, animated: true, completion: nil)
-            updateUserRegionsVisited(region.identifier)
         } else {
             let content = UNMutableNotificationContent()
-            content.title = "You were near \(region.identifier)"
+            content.title = "You were near \(region)"
             content.body = "You were awarded some bonus fitcoins"
             
             let center = UNUserNotificationCenter.current()
             
             let request = UNNotificationRequest(identifier: "RewardNotification", content: content, trigger: nil)
-            
             center.add(request, withCompletionHandler: nil)
-            updateUserRegionsVisited(region.identifier)
+        }
+    }
+    
+    func requestBonusFitcoins(_ userId: String, regionIdentifier: String, isViewActive: Bool) {
+        guard let url = URL(string: BlockchainGlobals.URL + "api/execute") else { return }
+        let parameters: [String:Any]
+        let request = NSMutableURLRequest(url: url)
+        
+        let session = URLSession.shared
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let args: [String] = [userId,"15"]
+        parameters = ["type":"invoke", "queue":"user_queue", "params":["userId":userId,"fcn":"awardFitcoins","args":args]]
+        request.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        
+        let getBonusFitcoins = session.dataTask(with: request as URLRequest) { (data, response, error) in
+            
+            if let data = data {
+                do {
+                    // Convert the data to JSON
+                    let jsonSerialized = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
+                    
+                    if let json = jsonSerialized, let status = json["status"], let resultId = json["resultId"] {
+                        NSLog(status as! String)
+                        NSLog(resultId as! String) // Use this one to get blockchain payload - should contain userId
+                        
+                        // Start pinging backend with resultId
+                        self.requestResults(resultId: resultId as! String, attemptNumber: 0, regionIdentifier: regionIdentifier, isViewActive: isViewActive)
+                    }
+                }  catch let error as NSError {
+                    print(error.localizedDescription)
+                }
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+        getBonusFitcoins.resume()
+    }
+    
+    func requestResults(resultId: String, attemptNumber: Int, regionIdentifier: String, isViewActive: Bool) {
+        if attemptNumber < 60 {
+            guard let url = URL(string: BlockchainGlobals.URL + "api/results/" + resultId) else { return }
+            
+            let session = URLSession.shared
+            let resultsFromBlockchain = session.dataTask(with: url) { (data, response, error) in
+                if let data = data {
+                    do {
+                        let backendResult = try JSONDecoder().decode(BackendResult.self, from: data)
+                        
+                        if backendResult.status == "done" {
+                            print(backendResult.result!)
+                            // {"message":"success","result":{"txId":"9a22c3920adb58a08e65529a53fe4d277e4b3be938a207631287d2c317dd6800","results":{"status":200,"message":"","payload":"{\"id\":\"67de5854-53e2-4a0d-ab99-83d05f90721d\",\"memberType\":\"user\",\"fitcoinsBalance\":15,\"totalSteps\":0,\"stepsUsedForConversion\":0,\"contractIds\":null,\"generatedFitcoins\":15}"}}}
+                            
+                            let jsonSerialized = try JSONSerialization.jsonObject(with: (backendResult.result?.data(using: .utf8))!, options: []) as? [String: Any]
+                            
+                            if let json = jsonSerialized, let message = json["message"] {
+                                if (message as! String == "success") {
+                                    self.updateUserRegionsVisited(regionIdentifier)
+                                    self.showAlert(regionIdentifier, isViewActive: isViewActive)
+                                }
+                            }
+                        }
+                        else {
+                            let when = DispatchTime.now() + 3
+                            DispatchQueue.main.asyncAfter(deadline: when) {
+                                self.requestResults(resultId: resultId, attemptNumber: attemptNumber+1, regionIdentifier: regionIdentifier, isViewActive: isViewActive)
+                            }
+                        }
+                    }  catch let error as NSError {
+                        print(error.localizedDescription)
+                    }
+                } else if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+            resultsFromBlockchain.resume()
+        }
+        else {
+            NSLog("Attempted 60 times to request transaction result... No results")
         }
     }
     
@@ -245,6 +339,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    // load blockchain user
+    func loadUser() -> BlockchainUser?  {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: BlockchainUser.ArchiveURL.path) as? BlockchainUser
     }
 
 }

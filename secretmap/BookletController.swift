@@ -45,7 +45,7 @@ class BookletController: UIViewController, UIPageViewControllerDataSource {
             self.getNumberOfRegisteredUsers(limit: 1000)
         }
                 
-        let urlString = "https://anthony-blockchain.us-south.containers.mybluemix.net/pages"
+        let urlString = BlockchainGlobals.URL + "pages"
         guard let url = URL(string: urlString) else {
             print("url error")
             return
@@ -65,14 +65,19 @@ class BookletController: UIViewController, UIPageViewControllerDataSource {
             do {
                 //Decode retrived data with JSONDecoder and assing type of Article object
                 let pages = try JSONDecoder().decode([Article].self, from: data)
-
-                //Get back to the main queue
-                DispatchQueue.main.async {
-                    self.pages = pages
-                    self.pageCount = pages.count
-                    self.createPageViewController()
-                    self.setupPageControl()
+                
+                if (pages.count > 0) {
+                    //Get back to the main queue
+                    DispatchQueue.main.async {
+                        self.pages = pages
+                        self.pageCount = pages.count
+                        self.createPageViewController()
+                        self.setupPageControl()
+                    }
+                } else {
+                    self.useDefaultPages()
                 }
+                
             } catch let jsonError {
                 print(jsonError)
 
