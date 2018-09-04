@@ -57,7 +57,7 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.reloadData()
         self.tableView.tableFooterView = UIView()
         
-        currentUser = BookletController().loadUser()
+//        currentUser = BookletController().loadUser()
         // Get the state of user, user contracts, and products for sale
         if currentUser != nil {
             self.getStateOfUser(currentUser!.userId)

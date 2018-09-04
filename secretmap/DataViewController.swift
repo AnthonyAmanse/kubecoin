@@ -71,7 +71,7 @@ class DataViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: enableRefreshWork!)
         
         fitcoinsLabel.text = "-"
-        currentUser = BookletController().loadUser()
+//        currentUser = BookletController().loadUser()
         if currentUser != nil {
             let userId: String = currentUser!.userId
             userIdLabel?.text = userId
@@ -398,7 +398,7 @@ class DataViewController: UIViewController {
             resultsFromBlockchain.resume()
         }
         else {
-            NSLog("Attempted 60 times to enroll... No results")
+            NSLog("Attempted 60 times to queue user info... No results")
         }
     }
 }

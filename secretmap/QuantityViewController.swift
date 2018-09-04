@@ -85,7 +85,7 @@ class QuantityViewController: UIViewController {
         productName.text = payload!.name
         totalPrice.text = String(describing: payload!.price)
         claimButton.layer.cornerRadius = 15
-        currentUser = BookletController().loadUser()
+//        currentUser = BookletController().loadUser()
         
         UIApplication.shared.statusBarStyle = .lightContent
     }
