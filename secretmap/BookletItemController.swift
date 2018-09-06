@@ -88,7 +88,7 @@ class BookletItemController: UIViewController {
         pageTitleView!.text = titleString
         subtitleView!.text = subTitleString
         if itemIndex == 0 {
-            subtitleView!.text = "Other Cloudcoin events >"
+            subtitleView!.text = "other Cloudcoins events >"
             EventClient().getEvents { (events) in
                 DispatchQueue.main.async {
                     self.events = events
@@ -115,8 +115,6 @@ class BookletItemController: UIViewController {
     }
     
     @objc func donePicker() {
-        print("done")
-        print(self.events![self.rowPicker!].eventId! + " - " + self.events![self.rowPicker!].name!)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.onEventSelection(self.events![self.rowPicker!].eventId!)
         
@@ -135,7 +133,7 @@ class BookletItemController: UIViewController {
         toolBar.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 248/255, alpha: 1)
         toolBar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(donePicker))
+        let doneButton = UIBarButtonItem(title: "Confirm", style: UIBarButtonItemStyle.plain, target: self, action: #selector(donePicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         
         toolBar.setItems([spaceButton, doneButton], animated: false)
@@ -147,9 +145,7 @@ class BookletItemController: UIViewController {
     
     func enablePageViewController(_ enable: Bool) {
         if self.parent is UIPageViewController {
-            print("yes it is a pageviewcontroller")
             if let bookletController = self.parent?.parent as? BookletController {
-                print("yes booklet")
                 if enable {
                     bookletController.pageViewController?.dataSource = bookletController
                     bookletController.createPageViewController()

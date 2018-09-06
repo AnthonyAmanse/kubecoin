@@ -36,17 +36,10 @@ class BookletController: UIViewController, UIPageViewControllerDataSource {
     
     var blockchainUser: BlockchainUser?
     var selectedEventCoreData: SelectedEventCoreData?
-    
-    var picker = UIPickerView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubview(picker)
-
-        picker.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        picker.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        picker.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         self.getPages()
     }
     

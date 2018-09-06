@@ -73,6 +73,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BMSPushObserver {
         selectedEventCoreData = SelectedEventCoreData(context: self.persistentContainer.viewContext)
         eventCoreData = EventCoreData(context: self.persistentContainer.viewContext)
         
+        
+        // MARK: - Register/initialize after event selection with proper tags
         BMSClient.sharedInstance.initialize(bluemixRegion: BMSClient.Region.usSouth)
         // MARK: remove the hardcoding in future
         BMSPushClient.sharedInstance.initializeWithAppGUID(appGUID: "", clientSecret: "")
