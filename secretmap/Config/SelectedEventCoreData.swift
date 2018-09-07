@@ -42,8 +42,8 @@ class SelectedEventCoreData {
             } else {
                 let selectedEvent = SelectedEvent(context: context)
                 selectedEvent.event = event
-                try context.save()
             }
+            try context.save()
         } catch {
             print("Error getting selected event")
         }

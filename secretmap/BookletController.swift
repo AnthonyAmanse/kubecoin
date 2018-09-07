@@ -34,7 +34,6 @@ class BookletController: UIViewController, UIPageViewControllerDataSource {
     // testedit
     private var pageCount = 0
     
-    var blockchainUser: BlockchainUser?
     var selectedEventCoreData: SelectedEventCoreData?
 
     override func viewDidLoad() {

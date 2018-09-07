@@ -10,10 +10,10 @@
 		1406A02852F1BDE866A52598 /* Pods_kubecoin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B418E209F42D2A787D738E1E /* Pods_kubecoin.framework */; };
 		922D72902036990500A345A1 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922D728F2036990500A345A1 /* ShopViewController.swift */; };
 		922D72B2203BA8E200A345A1 /* QuantityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922D72B1203BA8E200A345A1 /* QuantityViewController.swift */; };
-		9238EC5D202D09AA00AD1535 /* BlockchainUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9238EC5C202D09AA00AD1535 /* BlockchainUser.swift */; };
 		925D1B18213DCA280002DD6C /* EventCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D1B17213DCA270002DD6C /* EventCoreData.swift */; };
 		9278B40A20461CE800D83B4D /* OrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9278B40920461CE800D83B4D /* OrderTableViewCell.swift */; };
 		9278B40C204727AB00D83B4D /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9278B40B204727AB00D83B4D /* Globals.swift */; };
+		92A94DC82141F58300F36B85 /* ShopClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A94DC72141F58300F36B85 /* ShopClient.swift */; };
 		92AF8ABA213DD418007BBB70 /* UserClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AF8AB9213DD418007BBB70 /* UserClient.swift */; };
 		92AF8ABC213DE991007BBB70 /* SelectedEventCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AF8ABB213DE991007BBB70 /* SelectedEventCoreData.swift */; };
 		92AF8ABF213DF6A5007BBB70 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AF8ABE213DF6A5007BBB70 /* EventModel.swift */; };
@@ -96,10 +96,10 @@
 		777708ED23C79811ACDBB7EC /* Pods-fitcoin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fitcoin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fitcoin/Pods-fitcoin.debug.xcconfig"; sourceTree = "<group>"; };
 		922D728F2036990500A345A1 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		922D72B1203BA8E200A345A1 /* QuantityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityViewController.swift; sourceTree = "<group>"; };
-		9238EC5C202D09AA00AD1535 /* BlockchainUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockchainUser.swift; sourceTree = "<group>"; };
 		925D1B17213DCA270002DD6C /* EventCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCoreData.swift; sourceTree = "<group>"; };
 		9278B40920461CE800D83B4D /* OrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTableViewCell.swift; sourceTree = "<group>"; };
 		9278B40B204727AB00D83B4D /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		92A94DC72141F58300F36B85 /* ShopClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopClient.swift; sourceTree = "<group>"; };
 		92AF8AB9213DD418007BBB70 /* UserClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClient.swift; sourceTree = "<group>"; };
 		92AF8ABB213DE991007BBB70 /* SelectedEventCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedEventCoreData.swift; sourceTree = "<group>"; };
 		92AF8ABE213DF6A5007BBB70 /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
@@ -213,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				92AF8AB9213DD418007BBB70 /* UserClient.swift */,
+				92A94DC72141F58300F36B85 /* ShopClient.swift */,
 				92AF8AC0213DF758007BBB70 /* EventClient.swift */,
 			);
 			path = Controllers;
@@ -333,7 +334,6 @@
 				92BF067F203D2E0500B388F9 /* ContractViewController.swift */,
 				922D72B1203BA8E200A345A1 /* QuantityViewController.swift */,
 				922D728F2036990500A345A1 /* ShopViewController.swift */,
-				9238EC5C202D09AA00AD1535 /* BlockchainUser.swift */,
 				9278B40B204727AB00D83B4D /* Globals.swift */,
 				A2908D7A1FE2BEE200A0E9BE /* Assets.xcassets */,
 				A2908D7C1FE2BEE200A0E9BE /* LaunchScreen.storyboard */,
@@ -616,9 +616,9 @@
 				922D72B2203BA8E200A345A1 /* QuantityViewController.swift in Sources */,
 				925D1B18213DCA280002DD6C /* EventCoreData.swift in Sources */,
 				92AF8ABC213DE991007BBB70 /* SelectedEventCoreData.swift in Sources */,
-				9238EC5D202D09AA00AD1535 /* BlockchainUser.swift in Sources */,
 				A2321A7B20377E0C00E34DA7 /* Ship.swift in Sources */,
 				A2AF796C208D387C00AA99EE /* Standing.swift in Sources */,
+				92A94DC82141F58300F36B85 /* ShopClient.swift in Sources */,
 				92BF0682203E761900B388F9 /* OrdersViewController.swift in Sources */,
 				9278B40A20461CE800D83B4D /* OrderTableViewCell.swift in Sources */,
 				A2AF796A208D384E00AA99EE /* StandingsTableViewController.swift in Sources */,

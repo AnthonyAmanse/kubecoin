@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 class UserClient {
     
@@ -55,12 +54,6 @@ class UserClient {
         getStateOfUser.resume()
     }
     
-    // MARK: - Get Contracts of User From blockchain network
-    
-    func getContracts() {
-        
-    }
-    
     // MARK: - Send steps to blockchain for rewards
     // on completion returns userId and steps used for conversion
     func sendSteps(userId: String, steps: Int, _ onCompletion: @escaping (Int?) -> Void) {
@@ -100,12 +93,6 @@ class UserClient {
             }
         }
         sendStepsToBlockchain.resume()
-    }
-    
-    // MARK: - Create Contract on blockchain/Claim swags
-    
-    func createContract() {
-        
     }
     
     // MARK: - Register User to blockchain and Save to MongoDB

@@ -191,7 +191,7 @@
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0t-6W-32d">
-                                                        <rect key="frame" x="0.0" y="20" width="140" height="40"/>
+                                                        <rect key="frame" x="0.0" y="20" width="140" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="971-vu-hO8"/>
                                                             <constraint firstAttribute="width" constant="100" id="Sk4-lc-xqF"/>
@@ -201,7 +201,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="steps" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="esy-lN-u2d">
-                                                        <rect key="frame" x="0.0" y="60" width="140" height="20"/>
+                                                        <rect key="frame" x="0.0" y="40" width="140" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="jOe-ld-5Fe"/>
                                                         </constraints>
@@ -210,7 +210,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rBD-V6-YeK">
-                                                        <rect key="frame" x="0.0" y="80" width="140" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="60" width="140" height="20"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="w8J-C5-QfX"/>
@@ -259,7 +259,7 @@
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l6e-iX-ZWS">
-                                                        <rect key="frame" x="0.0" y="20" width="200" height="20"/>
+                                                        <rect key="frame" x="0.0" y="20" width="200" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="Vlc-SA-byn"/>
                                                             <constraint firstAttribute="width" constant="140" id="gt1-M8-ACF"/>
@@ -269,7 +269,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DuD-CV-zkN">
-                                                        <rect key="frame" x="0.0" y="40" width="200" height="20"/>
+                                                        <rect key="frame" x="0.0" y="60" width="200" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="i7b-rU-G0s"/>
                                                         </constraints>
@@ -278,7 +278,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uMd-v7-dPb">
-                                                        <rect key="frame" x="0.0" y="60" width="200" height="20"/>
+                                                        <rect key="frame" x="0.0" y="80" width="200" height="0.0"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="F3e-ph-vZd"/>
@@ -327,7 +327,7 @@
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vd-A1-hX3">
-                                                        <rect key="frame" x="0.0" y="20" width="140" height="40"/>
+                                                        <rect key="frame" x="0.0" y="20" width="140" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="7mh-sQ-dlD"/>
                                                             <constraint firstAttribute="height" constant="40" id="wWL-zC-y87"/>
@@ -337,7 +337,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kubecoins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gkP-SK-EZH">
-                                                        <rect key="frame" x="0.0" y="60" width="140" height="20"/>
+                                                        <rect key="frame" x="0.0" y="40" width="140" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="Rh7-Dw-yMC"/>
                                                         </constraints>
@@ -346,7 +346,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jva-Et-DiH">
-                                                        <rect key="frame" x="0.0" y="80" width="140" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="60" width="140" height="20"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="Aki-dt-7wU"/>
@@ -1223,7 +1223,7 @@
                                 <items>
                                     <navigationItem title="Contracts" id="pgz-X7-Hwy">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="uAK-ey-AuN">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
                                                 <action selector="back:" destination="sTi-Gx-rL9" id="Ofp-gY-Rrf"/>
                                             </connections>

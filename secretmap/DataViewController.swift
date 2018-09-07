@@ -34,8 +34,6 @@ class DataViewController: UIViewController {
     @IBOutlet weak var positionLabel:UILabel!
     @IBOutlet weak var avatarImage:UIImageView!
     
-    var currentUser: BlockchainUser?
-    
     let FITCOIN_STEPS_CONVERSION: Int = 100
     
     var totalStepsConvertedToFitcoin: Int?
@@ -92,9 +90,6 @@ class DataViewController: UIViewController {
         // initialize core data helpers
         selectedEventCoreData = SelectedEventCoreData(context: appDelegate.persistentContainer.viewContext)
         eventCoreData = EventCoreData(context: appDelegate.persistentContainer.viewContext)
-        
-//        self.getStepData()
-//        self.liveUpdateStepData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -118,34 +113,6 @@ class DataViewController: UIViewController {
                 }
             }
         }
-//        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//
-//        var currentPerson:Person
-//
-//        var people: [Person] = []
-//
-//        do {
-//            people = try context.fetch(Person.fetchRequest())
-//
-//            if( people.count > 0 ){
-//                currentPerson = people[0]
-//
-//                self.startDate = currentPerson.startdate!
-//
-//                pedometer.queryPedometerData(from: self.startDate, to: Date()) {
-//                    [weak self] pedometerData, error in
-//                    if let error = error {
-//                        //                        self?.on(error: error)
-//                    } else if let pedometerData = pedometerData {
-//                        DispatchQueue.main.async {
-//                            self?.stepsCountLabel.text = String(describing: pedometerData.numberOfSteps)
-//                            let distanceInKilometers: Double = (pedometerData.distance?.doubleValue)! / 1000.00
-//                            self?.distanceLabel.text = String(format: "%.2f", distanceInKilometers)
-//                        }
-//                    }
-//                }
-//            }
-//        }catch{}
     }
     
     func liveUpdateStepData(userId: String, date: Date, event: String){
@@ -218,83 +185,6 @@ class DataViewController: UIViewController {
             userIdLabel?.text = "You are not enrolled in the Blockchain network."
         }
     }
-    
-    // TODO: - Move to userClient
-//    private func sendStepsToFitchain(userId: String?, numberOfStepsToSend: Int) {
-//        guard let url = URL(string: BlockchainGlobals.URL + "api/execute") else { return }
-//        let parameters: [String:Any]
-//        let request = NSMutableURLRequest(url: url)
-//
-//        let session = URLSession.shared
-//        request.httpMethod = "POST"
-//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        let args: [String] = [userId!, String(describing: numberOfStepsToSend)]
-//        parameters = ["type":"invoke", "queue":"user_queue","params":["userId": userId!,"fcn": "generateFitcoins", "args":args]]
-//        request.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options: [])
-//
-//        let sendStepsToBlockchain = session.dataTask(with: request as URLRequest) { (data, response, error) in
-//
-//            if let data = data {
-//                do {
-//                    // Convert the data to JSON
-//                    let jsonSerialized = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
-//
-//                    if let json = jsonSerialized, let status = json["status"], let resultId = json["resultId"] {
-//                        NSLog(status as! String)
-//                        NSLog(resultId as! String) // Use this one to get blockchain payload
-//                        if status as! String == "success" {
-//
-//                            // Steps sent
-//                            self.sendingInProgress = false
-//
-//                            // Update steps that were used for conversion
-//                            let stepsUsedForConversion = numberOfStepsToSend - (numberOfStepsToSend % 100)
-//                            self.totalStepsConvertedToFitcoin = stepsUsedForConversion
-//
-//                            DispatchQueue.main.async {
-//                                self.refreshButton.isEnabled = true
-//                            }
-//
-//                            // Get state of user - should update fitcoins balance
-//                            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
-//                                self.getStateOfUser(userId!)
-//                            }
-//                        }
-//                    }
-//                }  catch let error as NSError {
-//                    self.sendingInProgress = false
-//                    print(error.localizedDescription)
-//                }
-//            } else if let error = error {
-//                self.sendingInProgress = false
-//                print(error.localizedDescription)
-//            }
-//        }
-//        sendStepsToBlockchain.resume()
-//    }
-    
-    // TODO: - Move to user client
-//    private func sendStepsToMongo(userId: String?, numberOfStepsToSend: Int) {
-//        guard let url = URL(string: BlockchainGlobals.URL + "registerees/update/" + userId! + "/steps/" + String(describing: numberOfStepsToSend)) else { return }
-//        let request = NSMutableURLRequest(url: url)
-//
-//        let session = URLSession.shared
-//        request.httpMethod = "POST"
-//
-//        let sendToMongo = session.dataTask(with: request as URLRequest) { (data, response, error) in
-//
-//            if let data = data {
-//                do {
-//
-//                }  catch let error as NSError {
-//                    print(error.localizedDescription)
-//                }
-//            } else if let error = error {
-//                print(error.localizedDescription)
-//            }
-//        }
-//        sendToMongo.resume()
-//    }
     
     func showPosition(userId: String, event: String) {
         
