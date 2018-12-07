@@ -169,8 +169,20 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell:ProductTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! ProductTableViewCell
         
         let productId = self.productsInStock![indexPath.row].productid
+        var uiImage: UIImage?
+        if let existingImage = UIImage(named: productId) {
+            uiImage = existingImage
+        } else {
+            if let eventId = self.selectedEventCoreData?.selectedEvent()?.event {
+                if let url = URL(string: BlockchainGlobals.URL + "buckets/" + eventId + "/" + productId + ".png") {
+                    if let data = try? Data(contentsOf: url) {
+                        uiImage = UIImage(data: data)
+                    }
+                }
+            }
+        }
         
-        let imageView = UIImageView(image: UIImage(named: productId))
+        let imageView = UIImageView(image: uiImage)
         imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         imageView.contentMode = .scaleAspectFit
         

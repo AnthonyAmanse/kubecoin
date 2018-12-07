@@ -108,21 +108,32 @@ class QuantityViewController: UIViewController {
         statusBar.tintColor = themeColor
         view.addSubview(statusBar)
         
+        // initialize core data helpers
+        selectedEventCoreData = SelectedEventCoreData(context: appDelegate.persistentContainer.viewContext)
+        eventCoreData = EventCoreData(context: appDelegate.persistentContainer.viewContext)
+        
         if payload?.productid == "think-shirt" || payload?.productid == "think-bandana" {
             stepper.maximumValue = 2
         }
         else if payload?.productid == "eye-sticker" || payload?.productid == "em-sticker" || payload?.productid == "bee-sticker" {
             stepper.maximumValue = 3
         }
-        
-        imageView.image = UIImage(named: payload!.productid)
+        var uiImage: UIImage?
+        if let existingImage = UIImage(named: payload!.productid) {
+            uiImage = existingImage
+        } else {
+            if let eventId = self.selectedEventCoreData?.selectedEvent()?.event {
+                if let url = URL(string: BlockchainGlobals.URL + "buckets/" + eventId + "/" + payload!.productid + ".png") {
+                    if let data = try? Data(contentsOf: url) {
+                        uiImage = UIImage(data: data)
+                    }
+                }
+            }
+        }
+        imageView.image = uiImage
         productName.text = payload!.name
         totalPrice.text = String(describing: payload!.price)
         claimButton.layer.cornerRadius = 15
-        
-        // initialize core data helpers
-        selectedEventCoreData = SelectedEventCoreData(context: appDelegate.persistentContainer.viewContext)
-        eventCoreData = EventCoreData(context: appDelegate.persistentContainer.viewContext)
         
         UIApplication.shared.statusBarStyle = .lightContent
     }

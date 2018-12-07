@@ -19,6 +19,8 @@ class ContractViewController: UIViewController {
     @IBOutlet var messageForState: UILabel!
     var payload: Contract?
     var receivedFromQuantityView: Bool?
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     @IBAction func back(_ sender: UIBarButtonItem) {
         if receivedFromQuantityView! {
@@ -42,11 +44,24 @@ class ContractViewController: UIViewController {
         
         UIApplication.shared.statusBarStyle = .lightContent
 
+        let selectedEventCoreData = SelectedEventCoreData(context: appDelegate.persistentContainer.viewContext)
         
+        var uiImage: UIImage?
+        if let existingImage = UIImage(named: payload!.productId) {
+            uiImage = existingImage
+        } else {
+            if let eventId = selectedEventCoreData.selectedEvent()?.event {
+                if let url = URL(string: BlockchainGlobals.URL + "buckets/" + eventId + "/" + payload!.productId + ".png") {
+                    if let data = try? Data(contentsOf: url) {
+                        uiImage = UIImage(data: data)
+                    }
+                }
+            }
+        }
         
         print(payload!)
         
-        imageView.image = UIImage(named: payload!.productId)
+        imageView.image = uiImage
         quantity.text = String(describing: payload!.quantity)
         totalPrice.text = String(describing: payload!.cost)
         productName.text = payload!.productName
